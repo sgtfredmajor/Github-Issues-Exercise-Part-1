@@ -1,32 +1,41 @@
-import { Component } from "react";
+import React, { Component } from "react";
+// import Issues from './issues';
+
 
 class IssueList extends Component{
     constructor(props)  {
         super(props);
-
         this.state = {
-            list: [],
-fetchData = async () =>{
+            list: []
+    };
+}
+    fetchData = async () => {
     const response = await fetch(
-        "https://github.com/facebookincubator/create-react-app/issues"
+        'https://github.com/facebookincubator/create-react-app/issues'
     );
     const data = await response.json();
     console.log(response);
-    return data.results
-}
-        };
-    }
-
+    return data;
+  };
+   async componentDidMount() {
+    const data = await this.fetchData();
+    this.setState({
+        list: data
+    })
+  }
 render () {
+    const { data } = this.state; 
+
     return (
         <div>
-            <ul>
-                {this.state.list.map(item =>(
-                    <li key={item}>{item}</li>
-                ))}
-            </ul>
-        </div>
-    )
-}
+            {this.state.data.map((data) => (
+                <p> {data} </p>
+            ))}
+            />
 
-export default IssueList;
+            </div>
+        
+    );
+}
+}
+    export default IssueList;
