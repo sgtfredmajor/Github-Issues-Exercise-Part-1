@@ -12,4 +12,4 @@ return (
 };
 
 
-export default Issue;y
+export default Issue;
